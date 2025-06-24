@@ -22,7 +22,7 @@ if __name__ == "__main__":
     .ordenar_data('date')\
     .mudar_tipo_para_datetime('date')\
     .selecionar_colunas(["date", "pm25"])\
-    .salvar_arquivo(caminho_saida)
+    .salvar_arquivo(caminho_saida)\
 
     
     
