@@ -48,10 +48,9 @@ if __name__ == "__main__":
         print(f"✅ Previsão salva em: {CAMINHO_FORECAST}")
 
         print("📊 Gerando gráfico da previsão...")
-        model.plot_custom(forecast)
+        model.plot(forecast)
 
         print("🧠 Gerando gráfico dos componentes (Tendência, Sazonalidade)...")
-
 
         print("🎉 Pipeline finalizado com sucesso!")
 
