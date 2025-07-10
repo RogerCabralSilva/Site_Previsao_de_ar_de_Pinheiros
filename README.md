@@ -15,7 +15,7 @@ Desenvolver uma aplicação acessível para prever a qualidade do ar (em especia
 - 📍 Foco na região de **Pinheiros - São Paulo**
 - 🧠 Modelo de machine learning treinado com dados reais
 - 📉 Gráficos intuitivos com plotagem automatizada
-- 🌐 Interface web leve e responsiva
+- 🌐 Interface web e responsiva
 
 ---
 
@@ -23,10 +23,10 @@ Desenvolver uma aplicação acessível para prever a qualidade do ar (em especia
 
 | Componente | Tecnologia |
 |-----------|------------|
-| Backend   | Python, Pandas, Scikit-Learn, Joblib |
+| Backend   | Python, Pandas, Prophet, FastAPI |
 | Modelagem | Regressão Linear / Random Forest |
-| Frontend  | Streamlit / Plotly |
-| Dados     | CETESB, INMET, APIs públicas |
+| Frontend  | HTML, CSS, JAVASCRIPT |
+| Dados     | APIs públicas |
 | Gráficos  | Matplotlib, Seaborn, Plotly |
 | Outros    | Docker (opcional), Git, VSCode |
 
