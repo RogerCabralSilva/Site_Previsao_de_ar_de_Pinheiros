@@ -6,7 +6,7 @@
 }
 @font-face {
     font-family: QuickSand;
-    src: url(fonts/Quicksand/Quicksand-VariableFont_wght.ttf);
+    src: url(../fonts/Quicksand/Quicksand-VariableFont_wght.ttf);
   }
 body{
     background-color: #e4f1ff; /*second option: #F0F4F8*/
