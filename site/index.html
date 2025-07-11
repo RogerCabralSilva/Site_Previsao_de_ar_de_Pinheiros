@@ -1,9 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>as</title>
-  </head>
-  <body></body>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirCast</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <div class="nav-content">
+            <div id="page-title">
+                <img src="images/logo.png" alt="logo image" style="margin-right: 1em; width: 3em;">
+                <a id="logo" href="#">A<span class="i-wrapper">i</span>r<span style="color:hsl(145, 100%, 56%);">Cast</span></a>
+            </div>
+            <div class="nav-anchors">
+                <ul class="nav-list">
+                    <li><a href="#" id="forecast" class="h-link">Previsão</a></li>
+                    <li><a href="#" id="login" class="h-link">Login</a></li>
+                    <li><a href="#" id="signup">Cadastre-se</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div role="banner" id="banner">
+        <div id="banner-content">
+            <div role="slogan" id="slogan">
+                <p style="color: white;">O ar que nos move</p>
+                <p style="color: rgb(31, 255, 124);">A informação que nos protege</p>
+            </div>
+            <div><img src="images/banner-img.png" alt=""></div>
+        </div>
+        <svg viewBox="0 0 200 50" id="wave-effect" preserveAspectRatio="none">
+            <defs>
+                <path id="wave" d="M-150,30 c100,-20 100,20 200,0 c100,-20 100,20 200,0 c100,-20 100,20 200,0 v500 h-200">
+            </defs>
+            <g id="wave-container">
+                <use href="#wave" fill="rgba(240, 244, 248, 0.5)" x="0" y="-10"/>
+                <use href="#wave" fill="rgba(240, 244, 248, 0.5)" x="0" y="-9"/>
+                <use href="#wave" fill="rgba(240, 244, 248, 0.5)" x="0" y="-8"/>
+                <use href="#wave" fill="rgba(240, 244, 248, 0.1)" x="0" y="-7"/>
+                <use href="#wave" fill="rgba(240, 244, 248, 0.3)" x="0" y="-6"/>
+                <use href="#wave" fill="#e4f1ff" x="0" y="-5"/> <!-- second option: #F0F4F8*-->
+            </g>
+    </div>
+
+    <main class="landing-main">
+        <header class="landing-header">
+            <h1>Respire tecnologia, respire saúde.</h1>
+            <p>
+                Você está prestes a conhecer o Aircast, a plataforma que transforma dados ambientais complexos em previsões claras e acionáveis sobre a qualidade do ar da sua cidade — em tempo real, na palma da sua mão.
+            </p>
+        </header>
+
+        <section>
+            <h2>Sobre</h2>
+            <div>
+                <p>
+                    Vivemos num mundo onde cada suspiro conta. Poluentes invisíveis podem afetar nosso humor, nossa produtividade e, claro, nossa saúde. Pensando nisso, criamos um espaço que reúne ciência de dados, design moderno e usabilidade simples para responder a uma pergunta essencial: “Posso respirar tranquilo hoje?” Aqui, você encontra previsões horárias, alertas personalizados e dicas práticas para proteger você e quem você ama.
+                </p>
+                <div>
+                    <!--Imagem e interatividade-->
+                </div>
+            </div>
+            <p>
+                A missão do Aircast é simples: informar para empoderar. Porque quando você entende o ar que respira, pode escolher melhor onde praticar exercícios, como planejar atividades ao ar livre ou até quando manter as janelas abertas.
+            </p>
+        </section>
+
+        <section>
+            <h2>Autores</h2>
+            <p>
+                O Aircast nasceu da curiosidade e da paixão de dois amigos que decidiram colocar a mão na massa para aprender, errar, acertar — e, principalmente, evoluir no universo da tecnologia:
+            </p>
+            <div class="authors-presentation">
+                <div>
+                    <img src="" alt=""> <!--Imagem e interatividade-->
+                    <p>
+                        Henry Gabriel – entusiasta e recém-chegado ao desenvolvimento web, responsável por todo o front-end que você está vendo agora. <br> Cada cor, cada animação e cada detalhe de acessibilidade foi pensado para que você tenha a melhor experiência possível.
+                    </p>
+                </div>
+                <div>
+                    <img src="" alt=""> <!--Imagem e interatividade-->
+                    <p>
+                        Roger Cabral – cientista de dados e guardião do back-end. <br> Ele traduz milhões de registros atmosféricos em índices intuitivos, usa modelos preditivos de última geração e garante que as informações cheguem a você com agilidade e precisão.
+                    </p>
+                </div>
+            </div>
+            <p>
+                Juntos, transformamos noites de estudo em linhas de código e cafés em protótipos funcionais — tudo para entregar a você um serviço confiável, gratuito e em constante evolução.
+            </p>
+        </section>
+
+        <section>
+            <h2>Convite</h2>
+            <p>
+                Se é a sua primeira visita, junte-se à nossa comunidade agora mesmo: basta um rápido cadastro para desbloquear previsões personalizadas, histórico de qualidade do ar na sua região e notificações sob medida. Já tem conta? Faça login e continue acompanhando as métricas que importam para o seu dia a dia.
+            </p>
+            <p>
+                Clique em “Cadastre-se” ou “Entrar” e respire a inovação conosco. O futuro está no ar — e ele começa aqui.
+            </p>
+        </section>
+    </main>
+</body>
 </html>
