@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Previsão da Qualidade do Ar - Pinheiros</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>Previsão da Qualidade do Ar - PM2.5</h1>
+
+    <label for="period">Período:</label>
+    <input type="number" id="period" value="7" min="1" max="30" />
+    <select id="unit">
+      <option value="days">Dias</option>
+      <option value="months">Meses</option>
+    </select>
+    <button onclick="fetchForecast()">Gerar Previsão</button>
+
+    <canvas id="chart" width="900" height="400"></canvas>
+
+    <script>
+      const oldData = [
+        { ds: "2025-06-19", pm25: 55 },
+        { ds: "2025-06-20", pm25: 60 },
+        { ds: "2025-06-21", pm25: 58 },
+        { ds: "2025-06-22", pm25: 62 },
+        { ds: "2025-06-23", pm25: 59 },
+        { ds: "2025-06-24", pm25: 57 },
+        { ds: "2025-06-25", pm25: 56 },
+      ];
+
+      let chart;
+
+      function fetchForecast() {
+        const period = document.getElementById("period").value;
+        const unit = document.getElementById("unit").value;
+
+        fetch("http://localhost:8000/api/predict_next", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ period: Number(period), unit }),
+        })
+          .then((res) => res.json())
+          .then((forecastData) => {
+            drawChart(oldData, forecastData);
+          })
+          .catch((err) => {
+            alert("Erro ao buscar previsão: " + err);
+          });
+      }
+
+      function drawChart(oldData, forecastData) {
+        const ctx = document.getElementById("chart").getContext("2d");
+
+        // Junta todas as datas e ordena
+        const allLabels = [...oldData.map((d) => d.ds)];
+
+        forecastData.forEach((f) => {
+          if (!allLabels.includes(f.ds)) allLabels.push(f.ds);
+        });
+
+        allLabels.sort((a, b) => new Date(a) - new Date(b));
+
+        // Série contínua: pega valor antigo ou previsto (prioriza antigo)
+        const combinedValues = allLabels.map((date) => {
+          const oldPoint = oldData.find((d) => d.ds === date);
+          if (oldPoint) return oldPoint.pm25;
+          const forecastPoint = forecastData.find((f) => f.ds === date);
+          return forecastPoint ? forecastPoint.yhat : null;
+        });
+
+        // Série previsão só com valores futuros (null onde tem dado antigo)
+        const forecastValues = allLabels.map((date) => {
+          const oldPoint = oldData.find((d) => d.ds === date);
+          if (oldPoint) return null; // ignora ponto antigo
+          const forecastPoint = forecastData.find((f) => f.ds === date);
+          return forecastPoint ? forecastPoint.yhat : null;
+        });
+
+        if (chart) chart.destroy();
+
+        chart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: allLabels,
+            datasets: [
+              {
+                label: "Histórico + Previsão",
+                data: combinedValues,
+                borderColor: "blue",
+                fill: false,
+                tension: 0.1,
+                borderWidth: 2,
+              },
+              {
+                label: "Previsão (destacada)",
+                data: forecastValues,
+                borderColor: "red",
+                borderDash: [5, 5],
+                fill: false,
+                tension: 0.1,
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: { display: true, title: { display: true, text: "Data" } },
+              y: { display: true, title: { display: true, text: "PM2.5" } },
+            },
+          },
+        });
+      }
+
+      // Desenha gráfico inicial só com dados antigos
+      drawChart(oldData, []);
+    </script>
+  </body>
+</html>
