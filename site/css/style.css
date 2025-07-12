@@ -250,7 +250,8 @@ nav{
 }
 #login-banner{
     background-image: url('../images/login-banner.png');
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    display: flex;
 }
 
 #formulario form input:focus{
