@@ -170,6 +170,7 @@ nav{
 }
 .landing-main section{
     text-align: left;
+    color: #1E1E1E;
 }
 .authors-presentation{
     display: flex;
@@ -184,19 +185,21 @@ nav{
 /*********************LOGIN PAGE - Main content style*********************/
 #login-main{
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    flex-direction: row;
     margin: 0;
     background: #1fff7c;
     height: 100vh;
+    align-items: center;
 }
 #form-container{
     display: flex;
     width: 100vw;
+    height: 100vh;
+    padding: 100;
 }
 #login-banner{
-    background: #313538;
-    flex: 3;
+    background:  hsl(200, 29%, 24%);
+    flex: 1;
 }
 #formulario{
     display: flex;
@@ -204,11 +207,35 @@ nav{
     background-color: #F0F4F8;
     padding: 5px;
     flex: 1;
+    justify-content: center;
+    color: #1E1E1E;
+}
+#formulario header{
+    text-align: left;
+    margin: 0px 80px 0px 80px;
 }
 #formulario form{
     display: flex;
     flex-direction: column;
+    margin: 20px 100px 80px 100px;
 }
-form>*{
+#formulario form>div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-around;
+}
+#formulario form input{
+    width: 100%;
+}
+
+#formulario form>*{
     margin: 30px;
+}
+#formulario button{
+    padding: 10px;
+    border-radius: 10px;
+    border: transparent;
+    background: #1fff7c;
+    font: 1.2rem 200;
 }

@@ -25,10 +25,19 @@
     <main id="login-main">
         <div id="form-container">
             <div id="formulario">
-                <h1 style="font-size: 1.5rem;">Bem-vindo de novo!</h1>
+                <header>
+                    <h1 style="font-size: 1.5rem;">Bem-vindo de novo!</h1>
+                    <p style="color: #7a7575;font-weight: 500;"><em>Por favor, insira seus dados</em></p>
+                </header>
                 <form action="">
-                    <input type="email" name="email" id="email">
-                    <input type="password" name="password" id="password">
+                    <div>
+                        <label for="email">Endereço de E-mail</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div>
+                        <label for="password">Senha</label>
+                        <input type="password" name="password" id="password">
+                    </div>
                     <button type="submit">Sign in</button>
                 </form>
             </div>
