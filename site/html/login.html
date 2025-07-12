@@ -15,7 +15,7 @@
             </div>
             <div class="nav-anchors">
                 <ul class="nav-list">
-                    <li><a href="../index.html" id="home">Home</a></li>
+                    <li><a href="../index.html" id="home" class="h-link">Home</a></li>
                     <li><a href="previsao.html" id="forecast" class="h-link">Previsão</a></li>
                     <li><a href="#" id="login" class="h-link">Login</a></li>
                     <li><a href="cadastro.html" id="signup">Cadastre-se</a></li>
@@ -43,7 +43,13 @@
                 </form>
             </div>
             <div id="login-banner">
-                
+                <svg viewBox="0 0 200 50" id="curve-effect" preserveAspectRatio="none">
+                    <defs>
+                        <path id="curve" d="M-150,30 c100,-20 100,20 200,0 c100,-20 100,20 200,0 c100,-20 100,20 200,0 v500 h-200">
+                    </defs>
+                    <g id="curve-container">
+                        <use href="#curve" fill="#e4f1ff"/> <!-- second option: #F0F4F8*-->
+                    </g>
             </div>
         </div>
     </main>
