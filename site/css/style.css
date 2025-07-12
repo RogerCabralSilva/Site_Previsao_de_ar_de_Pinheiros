@@ -248,6 +248,11 @@ nav{
     transition: 0.5s;
     color: #F0F4F8;
 }
+#login-banner{
+    background-image: url('../images/login-banner.png');
+    background-repeat: no-repeat
+}
+
 #formulario form input:focus{
     outline: none;
     border: solid 2px #1fff7c;
