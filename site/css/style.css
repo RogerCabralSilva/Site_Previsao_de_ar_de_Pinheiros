@@ -227,6 +227,13 @@ nav{
 }
 #formulario form input{
     width: 100%;
+    padding: 0.2rem;
+    background: #F0F4F8;
+    border: solid 2px #313538;
+    border-radius: 3px;
+}
+#formulario form label{
+    color: #313538;
 }
 
 #formulario form>*{
@@ -237,5 +244,19 @@ nav{
     border-radius: 10px;
     border: transparent;
     background: #1fff7c;
-    font: 1.2rem 200;
+    font: 1.2rem QuickSand;
+    transition: 0.5s;
+    color: #F0F4F8;
+}
+#formulario form input:focus{
+    outline: none;
+    border: solid 2px #1fff7c;
+}
+#formulario button:hover{
+    border: solid 2px #1fff7c;
+    background: #F0F4F8;
+    box-shadow: 0px 0px 10px #1fff7c;
+    color: #1fff7c;
+    text-shadow: 0px 0px 10px #1fff7c;
+    transition: 0.2s;
 }
