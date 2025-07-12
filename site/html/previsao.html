@@ -2,21 +2,140 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Previsão da Qualidade do Ar - Pinheiros</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Quicksand", sans-serif;
+        background: linear-gradient(135deg, #d9f0ff, #a1d6ff);
+        margin: 0;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #222;
+        min-height: 100vh;
+      }
+      h1 {
+        color: #0b3c5d;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-size: 2.4rem;
+      }
+      .container {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        padding: 2rem 3rem;
+        max-width: 900px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+      }
+      label {
+        font-weight: 600;
+        color: #0b3c5d;
+      }
+      input[type="number"],
+      select {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        border: 2px solid #0b3c5d;
+        border-radius: 10px;
+        transition: 0.3s ease;
+      }
+      input:focus,
+      select:focus {
+        border-color: #1fff7c;
+        outline: none;
+        box-shadow: 0 0 8px #1fff7c88;
+      }
+      button {
+        background-color: #1fff7c;
+        color: #0b3c5d;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        padding: 0.6rem 2rem;
+        border-radius: 16px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(31, 255, 124, 0.4);
+        transition: 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      button:hover {
+        background-color: #16c967;
+        color: white;
+      }
+      button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      .spinner {
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(0, 0, 0, 0.2);
+        border-top: 3px solid #0b3c5d;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        display: none;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      canvas {
+        background: #f9faff;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+      }
+      @media (max-width: 600px) {
+        .controls {
+          flex-direction: column;
+        }
+        input,
+        select,
+        button {
+          width: 100%;
+        }
+      }
+    </style>
   </head>
   <body>
     <h1>Previsão da Qualidade do Ar - PM2.5</h1>
 
-    <label for="period">Período:</label>
-    <input type="number" id="period" value="7" min="1" max="30" />
-    <select id="unit">
-      <option value="days">Dias</option>
-      <option value="months">Meses</option>
-    </select>
-    <button onclick="fetchForecast()">Gerar Previsão</button>
+    <div class="container">
+      <div class="controls">
+        <label for="period">Período:</label>
+        <input type="number" id="period" value="7" min="1" max="30" />
+        <select id="unit">
+          <option value="days">Dias</option>
+          <option value="months">Meses</option>
+        </select>
+        <button id="load-btn" onclick="fetchForecast()">
+          <span>Gerar Previsão</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+      </div>
 
-    <canvas id="chart" width="900" height="400"></canvas>
+      <canvas id="chart" width="900" height="400"></canvas>
+    </div>
 
     <script>
       const oldData = [
@@ -31,28 +150,40 @@
 
       let chart;
 
+      function setLoading(isLoading) {
+        const spinner = document.getElementById("spinner");
+        const btn = document.getElementById("load-btn");
+        spinner.style.display = isLoading ? "inline-block" : "none";
+        btn.disabled = isLoading;
+      }
+
       function fetchForecast() {
         const period = document.getElementById("period").value;
         const unit = document.getElementById("unit").value;
+        setLoading(true);
 
-        fetch("http://localhost:8000/api/predict_next", {
+        fetch("https://a3334a33edf9.ngrok-free.app/api/predict_next", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ period: Number(period), unit }),
         })
-          .then((res) => res.json())
+          .then((res) => {
+            if (!res.ok) throw new Error("Erro na resposta da API");
+            return res.json();
+          })
           .then((forecastData) => {
             drawChart(oldData, forecastData);
           })
           .catch((err) => {
-            alert("Erro ao buscar previsão: " + err);
+            alert("Erro ao buscar previsão: " + err.message);
+          })
+          .finally(() => {
+            setLoading(false);
           });
       }
 
       function drawChart(oldData, forecastData) {
         const ctx = document.getElementById("chart").getContext("2d");
-
-        // Junta todas as datas e ordena
         const allLabels = [...oldData.map((d) => d.ds)];
 
         forecastData.forEach((f) => {
@@ -61,21 +192,51 @@
 
         allLabels.sort((a, b) => new Date(a) - new Date(b));
 
-        // Série contínua: pega valor antigo ou previsto (prioriza antigo)
-        const combinedValues = allLabels.map((date) => {
-          const oldPoint = oldData.find((d) => d.ds === date);
-          if (oldPoint) return oldPoint.pm25;
-          const forecastPoint = forecastData.find((f) => f.ds === date);
-          return forecastPoint ? forecastPoint.yhat : null;
+        const historicalValues = allLabels.map((date) => {
+          const point = oldData.find((d) => d.ds === date);
+          return point ? point.pm25 : null;
         });
 
-        // Série previsão só com valores futuros (null onde tem dado antigo)
-        const forecastValues = allLabels.map((date) => {
-          const oldPoint = oldData.find((d) => d.ds === date);
-          if (oldPoint) return null; // ignora ponto antigo
-          const forecastPoint = forecastData.find((f) => f.ds === date);
-          return forecastPoint ? forecastPoint.yhat : null;
+        const forecastValues = allLabels.map((date, i) => {
+          const hist = oldData.find((d) => d.ds === date);
+          const forecast = forecastData.find((f) => f.ds === date);
+          if (hist) return null; // não mostrar nos pontos de histórico
+          return forecast ? forecast.yhat : null;
         });
+
+        // Adiciona o último valor do histórico como início da linha de previsão
+        const lastHist = oldData[oldData.length - 1];
+        const firstForecast = forecastData[0];
+        const combinedForecastValues = allLabels.map((date) => {
+          if (date === lastHist.ds) return lastHist.pm25;
+          const forecast = forecastData.find((f) => f.ds === date);
+          return forecast ? forecast.yhat : null;
+        });
+
+        const forecastStartIndex = allLabels.findIndex((label) =>
+          forecastData.some((f) => f.ds === label)
+        );
+
+        const verticalLine = {
+          id: "separatorLine",
+          beforeDraw: (chart) => {
+            if (forecastStartIndex <= 0) return;
+            const x = chart.scales.x.getPixelForValue(
+              allLabels[forecastStartIndex]
+            );
+            const yAxis = chart.scales.y;
+            const ctx = chart.ctx;
+            ctx.save();
+            ctx.beginPath();
+            ctx.setLineDash([6, 6]);
+            ctx.moveTo(x, yAxis.top);
+            ctx.lineTo(x, yAxis.bottom);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#1fff7c";
+            ctx.stroke();
+            ctx.restore();
+          },
+        };
 
         if (chart) chart.destroy();
 
@@ -85,34 +246,88 @@
             labels: allLabels,
             datasets: [
               {
-                label: "Histórico + Previsão",
-                data: combinedValues,
-                borderColor: "blue",
+                label: "Histórico",
+                data: historicalValues,
+                borderColor: "#0b3c5d",
+                backgroundColor: "rgba(11, 60, 93, 0.08)",
                 fill: false,
-                tension: 0.1,
+                tension: 0.3,
                 borderWidth: 2,
+                pointRadius: 3,
+                pointHoverRadius: 5,
               },
               {
-                label: "Previsão (destacada)",
-                data: forecastValues,
-                borderColor: "red",
-                borderDash: [5, 5],
+                label: "Previsão",
+                data: combinedForecastValues,
+                borderColor: "#1fff7c",
+                borderDash: [6, 5],
                 fill: false,
-                tension: 0.1,
+                tension: 0.3,
                 borderWidth: 2,
+                pointRadius: 3,
+                pointHoverRadius: 5,
               },
             ],
           },
           options: {
+            animation: {
+              duration: 800,
+              easing: "easeOutQuart",
+            },
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "top",
+                labels: {
+                  color: "#0b3c5d",
+                  font: { size: 14, weight: "600" },
+                },
+              },
+              tooltip: {
+                backgroundColor: "#1fff7c",
+                titleColor: "#0b3c5d",
+                bodyColor: "#0b3c5d",
+                cornerRadius: 8,
+                padding: 10,
+              },
+            },
             scales: {
-              x: { display: true, title: { display: true, text: "Data" } },
-              y: { display: true, title: { display: true, text: "PM2.5" } },
+              x: {
+                title: {
+                  display: true,
+                  text: "Data",
+                  font: { weight: "bold" },
+                  color: "#0b3c5d",
+                },
+                ticks: {
+                  color: "#0b3c5d",
+                  maxRotation: 45,
+                  minRotation: 30,
+                },
+                grid: {
+                  color: "#e0f0ff",
+                },
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "PM2.5 (µg/m³)",
+                  font: { weight: "bold" },
+                  color: "#0b3c5d",
+                },
+                ticks: {
+                  color: "#0b3c5d",
+                },
+                grid: {
+                  color: "#e0f0ff",
+                },
+              },
             },
           },
         });
       }
 
-      // Desenha gráfico inicial só com dados antigos
       drawChart(oldData, []);
     </script>
   </body>
