@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AirCast</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js"></script>
 </head>
 <body>
     <nav role="navigation" aria-label="Main navigation">
@@ -32,12 +33,12 @@
                 </header>
                 <form action="">
                     <div>
-                        <label for="email">Endereço de E-mail</label>
-                        <input type="email" name="email" id="email">
+                        <label for="email" class="form_label">Endereço de E-mail</label>
+                        <input type="email" name="email" id="email" onfocus="login_focus(0)" onblur="login_blur(0)">
                     </div>
                     <div>
-                        <label for="password">Senha</label>
-                        <input type="password" name="password" id="password">
+                        <label for="password" class="form_label">Senha</label>
+                        <input type="password" name="password" id="password" onfocus="login_focus(1)" onblur="login_blur(1)">
                     </div>
                     <button type="submit">Sign in</button>
                 </form>
@@ -53,4 +54,5 @@
             </div>
         </div>
     </main>
+    <script src="../js/script.js"></script>
 </body>
