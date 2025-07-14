@@ -357,8 +357,6 @@ nav{
 footer {
     background-color: #5c5858;
     color: #b4b4b4;
-    border-top-right-radius: 50px 50px;
-    border-top-left-radius: 50px 50px;
     text-align: center;
     padding: 1.2em;
 }
