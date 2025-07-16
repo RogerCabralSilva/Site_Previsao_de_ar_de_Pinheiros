@@ -1,11 +1,8 @@
 from fastapi import FastAPI
 from api.app.endpoints.routes import router
-
-from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Previsão da Qualidade do Ar")
-
-from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,4 +12,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# 👇 Isso inclui todas as rotas com prefixo /api
 app.include_router(router, prefix="/api")

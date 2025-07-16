@@ -1,62 +1,157 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AirCast</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/script.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AirCast - Cadastro</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js" defer></script>
+  </head>
+  <body>
     <nav role="navigation" aria-label="Main navigation">
-        <div class="nav-content">
-            <div id="page-title">
-                <img src="../images/logo.png" alt="logo image" style="margin-right: 1em; width: 3em;">
-                <a id="logo" href="#">A<span class="i-wrapper">i</span>r<span style="color:hsl(145, 100%, 56%);">Cast</span></a>
-            </div>
-            <div class="nav-anchors">
-                <ul class="nav-list">
-                    <li><a href="../index.html" id="home" class="h-link">Home</a></li>
-                    <li><a href="previsao.html" id="forecast" class="h-link">Previsão</a></li>
-                    <li><a href="login.html" id="login" class="h-link">Login</a></li>
-                    <li><a href="#" id="signup">Cadastre-se</a></li>
-                </ul>
-            </div>
+      <div class="nav-content">
+        <div id="page-title">
+          <img
+            src="../images/logo.png"
+            alt="logo image"
+            style="margin-right: 1em; width: 3em"
+          />
+          <a id="logo" href="#"
+            >A<span class="i-wrapper">i</span>r<span
+              style="color: hsl(145, 100%, 56%)"
+              >Cast</span
+            ></a
+          >
         </div>
+        <div class="nav-anchors">
+          <ul class="nav-list">
+            <li><a href="../index.html" id="home" class="h-link">Home</a></li>
+            <li>
+              <a href="previsao.html" id="forecast" class="h-link">Previsão</a>
+            </li>
+            <li><a href="login.html" id="login" class="h-link">Login</a></li>
+            <li><a href="#" id="signup">Cadastre-se</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
     <main id="signup-main">
-        <div id="form-container">
-            <div id="signup-banner">
-                <svg viewBox="-100 0 100 200" id="curve-effect" preserveAspectRatio="none">
-                    <defs>
-                        <path id="curve" d="M0,0 c-50,100 40,100 -25,200 L70,200">
-                    </defs>
-                    <g id="curve-container">
-                        <use href="#curve" fill="#F0F4F8"/> <!-- second option: #F0F4F8*-->
-                    </g>
-            </div>
-            <div id="formulario">
-                <header>
-                    <h1 style="font-size: 1.5rem;">Seja bem vindo!</h1>
-                    <p style="color: #7a7575;font-weight: 500;"><em>Por favor, preencha os campos abaixo para criar um login</em></p>
-                </header>
-                <form action="">
-                    <div>
-                        <label for="text" class="form_label">Defina um nome de de usuário</label>
-                        <input type="text" name="username" id="username" placeholder="Nome de usuário" onfocus="login_focus(0)" onblur="login_blur(0)">
-                    </div>
-                    <div>
-                        <label for="email" class="form_label">Endereço de E-mail</label>
-                        <input type="email" name="email" id="email" placeholder="E-mail" onfocus="login_focus(1)" onblur="login_blur(1)">
-                    </div>
-                    <div>
-                        <label for="password" class="form_label">Senha</label>
-                        <input type="password" name="password" id="password" placeholder="Senha" onfocus="login_focus(1)" onblur="login_blur(1)">
-                    </div>
-                    <button type="submit">Sign in</button>
-                </form>
-            </div>
+      <div id="form-container">
+        <div id="signup-banner">
+          <svg
+            viewBox="-100 0 100 200"
+            id="curve-effect"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <path id="curve" d="M0,0 c-50,100 40,100 -25,200 L70,200"></path>
+            </defs>
+            <g id="curve-container">
+              <use href="#curve" fill="#F0F4F8" />
+            </g>
+          </svg>
         </div>
+        <div id="formulario">
+          <header>
+            <h1 style="font-size: 1.5rem">Seja bem-vindo!</h1>
+            <p style="color: #7a7575; font-weight: 500">
+              <em>Por favor, preencha os campos abaixo para criar um login</em>
+            </p>
+          </header>
+          <form id="formCadastro">
+            <div>
+              <label for="nome" class="form_label"
+                >Defina um nome de usuário</label
+              >
+              <input
+                type="text"
+                name="nome"
+                id="nome"
+                placeholder="Nome de usuário"
+                onfocus="login_focus(0)"
+                onblur="login_blur(0)"
+                required
+              />
+            </div>
+            <div>
+              <label for="email" class="form_label">Endereço de E-mail</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="E-mail"
+                onfocus="login_focus(1)"
+                onblur="login_blur(1)"
+                required
+              />
+            </div>
+            <div>
+              <label for="senha" class="form_label">Senha</label>
+              <input
+                type="password"
+                name="senha"
+                id="senha"
+                placeholder="Senha"
+                onfocus="login_focus(2)"
+                onblur="login_blur(2)"
+                required
+              />
+            </div>
+            <button type="submit">Cadastrar</button>
+          </form>
+
+          <div id="mensagem" style="margin-top: 1em; font-weight: 600"></div>
+
+          <script>
+            document
+              .getElementById("formCadastro")
+              .addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const mensagem = document.getElementById("mensagem");
+                mensagem.textContent = "";
+                mensagem.style.color = "";
+
+                const formData = new FormData(this);
+
+                try {
+                  const response = await fetch(
+                    "https://c3ebc25ca73b.ngrok-free.app/api/usuarios/cadastro",
+                    {
+                      method: "POST",
+                      body: formData,
+                    }
+                  );
+
+                  const data = await response.json(); // <--- Aqui é onde faltava
+
+                  console.log("Resposta da API:", data);
+
+                  if (data.mensagem) {
+                    mensagem.textContent = data.mensagem;
+                    mensagem.style.color = "green";
+                    this.reset();
+                  } else if (data.erro) {
+                    mensagem.textContent = data.erro;
+                    mensagem.style.color = "red";
+                  } else if (data.detail) {
+                    mensagem.textContent = data.detail;
+                    mensagem.style.color = "red";
+                  } else {
+                    mensagem.textContent =
+                      "Resposta inesperada do servidor: " +
+                      JSON.stringify(data);
+                    mensagem.style.color = "red";
+                  }
+                } catch (error) {
+                  mensagem.textContent = "Erro ao conectar com o servidor.";
+                  mensagem.style.color = "red";
+                  console.error("Erro na requisição:", error);
+                }
+              });
+          </script>
+        </div>
+      </div>
     </main>
-    <script src="../js/script.js"></script>
-</body>
+  </body>
+</html>

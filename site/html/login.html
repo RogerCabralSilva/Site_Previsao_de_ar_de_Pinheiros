@@ -1,58 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AirCast</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirCast - Login</title>
+    <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/script.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <nav role="navigation" aria-label="Main navigation">
-        <div class="nav-content">
-            <div id="page-title">
-                <img src="../images/logo.png" alt="logo image" style="margin-right: 1em; width: 3em;">
-                <a id="logo" href="#">A<span class="i-wrapper">i</span>r<span style="color:hsl(145, 100%, 56%);">Cast</span></a>
-            </div>
-            <div class="nav-anchors">
-                <ul class="nav-list">
-                    <li><a href="../index.html" id="home" class="h-link">Home</a></li>
-                    <li><a href="previsao.html" id="forecast" class="h-link">Previsão</a></li>
-                    <li><a href="#" id="login" class="h-link">Login</a></li>
-                    <li><a href="cadastro.html" id="signup">Cadastre-se</a></li>
-                </ul>
-            </div>
+      <div class="nav-content">
+        <div id="page-title">
+          <img
+            src="../images/logo.png"
+            alt="logo image"
+            style="margin-right: 1em; width: 3em"
+          />
+          <a id="logo" href="#">
+            A<span class="i-wrapper">i</span>r
+            <span style="color: hsl(145, 100%, 56%)">Cast</span>
+          </a>
         </div>
+        <div class="nav-anchors">
+          <ul class="nav-list">
+            <li><a href="../index.html" id="home" class="h-link">Home</a></li>
+            <li>
+              <a href="previsao.html" id="forecast" class="h-link">Previsão</a>
+            </li>
+            <li><a href="#" id="login" class="h-link">Login</a></li>
+            <li><a href="cadastro.html" id="signup">Cadastre-se</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
+
     <main id="login-main">
-        <div id="form-container">
-            <div id="formulario">
-                <header>
-                    <h1 style="font-size: 1.5rem;">Bem-vindo de novo!</h1>
-                    <p style="color: #7a7575;font-weight: 500;"><em>Por favor, insira seus dados</em></p>
-                </header>
-                <form action="">
-                    <div>
-                        <label for="email" class="form_label">Endereço de E-mail</label>
-                        <input type="email" name="email" id="email" placeholder="E-mail" onfocus="login_focus(0)" onblur="login_blur(0)">
-                    </div>
-                    <div>
-                        <label for="password" class="form_label">Senha</label>
-                        <input type="password" name="password" id="password" placeholder="Senha" onfocus="login_focus(1)" onblur="login_blur(1)">
-                    </div>
-                    <button type="submit">Login</button>
-                </form>
+      <div id="form-container">
+        <div id="formulario">
+          <header>
+            <h1 style="font-size: 1.5rem">Bem-vindo de novo!</h1>
+            <p style="color: #7a7575; font-weight: 500">
+              <em>Por favor, insira seus dados</em>
+            </p>
+          </header>
+
+          <form id="formLogin" method="POST" enctype="multipart/form-data">
+            <div>
+              <label for="email" class="form_label">Endereço de E-mail</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="E-mail"
+                required
+              />
             </div>
-            <div id="login-banner">
-                <svg viewBox="0 0 100 200" id="curve-effect" preserveAspectRatio="none">
-                    <defs>
-                        <path id="curve" d="M0,0 c50,100 -40,100 25,200 L0,200">
-                    </defs>
-                    <g id="curve-container">
-                        <use href="#curve" fill="#F0F4F8"/> <!-- second option: #F0F4F8*-->
-                    </g>
+            <div>
+              <label for="senha" class="form_label">Senha</label>
+              <input
+                type="password"
+                name="senha"
+                id="senha"
+                placeholder="Senha"
+                required
+              />
             </div>
+            <button type="submit">Login</button>
+          </form>
+
+          <div id="mensagem" style="margin-top: 1em; font-weight: 600"></div>
+
+          <script>
+            document
+              .getElementById("formLogin")
+              .addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const mensagem = document.getElementById("mensagem");
+                mensagem.textContent = "";
+                mensagem.style.color = "";
+
+                const formData = new FormData(this);
+
+                try {
+                  const response = await fetch(
+                    "https://c3ebc25ca73b.ngrok-free.app/api/usuarios/login",
+                    {
+                      method: "POST",
+                      body: formData,
+                    }
+                  );
+
+                  const data = await response.json();
+
+                  if (response.ok) {
+                    mensagem.textContent =
+                      data.mensagem || "Login realizado com sucesso!";
+                    mensagem.style.color = "green";
+
+                    // Redirecionar, se quiser:
+                    // window.location.href = "previsao.html";
+                  } else {
+                    mensagem.textContent =
+                      data.erro || data.detail || "Erro ao fazer login.";
+                    mensagem.style.color = "red";
+                  }
+                } catch (error) {
+                  console.error("Erro na requisição:", error);
+                  mensagem.textContent = "Erro ao conectar com o servidor.";
+                  mensagem.style.color = "red";
+                }
+              });
+          </script>
         </div>
+
+        <div id="login-banner">
+          <svg
+            viewBox="0 0 100 200"
+            id="curve-effect"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <path id="curve" d="M0,0 c50,100 -40,100 25,200 L0,200"></path>
+            </defs>
+            <g id="curve-container">
+              <use href="#curve" fill="#F0F4F8" />
+            </g>
+          </svg>
+        </div>
+      </div>
     </main>
+
     <script src="../js/script.js"></script>
-</body>
+  </body>
+</html>
