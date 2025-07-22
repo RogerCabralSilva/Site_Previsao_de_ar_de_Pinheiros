@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AirCast</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/script.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AirCast - Cadastro</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js" defer></script>
+  </head>
+  <body>
     <nav role="navigation" aria-label="Main navigation">
-        <div class="nav-content">
-            <div id="page-title">
-                <img src="../images/logo.png" alt="logo image" style="margin-right: 1em; width: 3em;">
-                <a id="logo" href="#">A<span class="i-wrapper">i</span>r<span style="color:hsl(145, 100%, 56%);">Cast</span></a>
-            </div>
-            <div class="nav-anchors">
-                <ul class="nav-list">
-                    <li><a href="../index.html" id="home" class="h-link">Home</a></li>
-                    <li><a href="previsao.html" id="forecast" class="h-link">Previsão</a></li>
-                    <li><a href="login.html" id="login" class="h-link">Login</a></li>
-                    <li><a href="#" id="signup">Cadastre-se</a></li>
-                </ul>
-            </div>
+      <div class="nav-content">
+        <div id="page-title">
+          <img
+            src="../images/logo.png"
+            alt="logo image"
+            style="margin-right: 1em; width: 3em"
+          />
+          <a id="logo" href="#"
+            >A<span class="i-wrapper">i</span>r<span
+              style="color: hsl(145, 100%, 56%)"
+              >Cast</span
+            ></a
+          >
         </div>
+        <div class="nav-anchors">
+          <ul class="nav-list">
+            <li><a href="../index.html" id="home" class="h-link">Home</a></li>
+            <li>
+              <a href="previsao.html" id="forecast" class="h-link">Previsão</a>
+            </li>
+            <li><a href="login.html" id="login" class="h-link">Login</a></li>
+            <li><a href="#" id="signup">Cadastre-se</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
     <main id="signup-main">
         <div id="form-container">
@@ -42,7 +53,7 @@
                 </header>
                 <form action="">
                     <div>
-                        <label for="text" class="form_label">Defina um nome de usuário</label>
+                        <label for="text" class="form_label">Defina um nome de de usuário</label>
                         <input type="text" name="username" id="username" placeholder="Nome de usuário" onfocus="login_focus(0)" onblur="login_blur(0)">
                     </div>
                     <div>
@@ -51,12 +62,12 @@
                     </div>
                     <div>
                         <label for="password" class="form_label">Senha</label>
-                        <input type="password" name="password" id="password" placeholder="Senha" onfocus="login_focus(2)" onblur="login_blur(2)">
+                        <input type="password" name="password" id="password" placeholder="Senha" onfocus="login_focus(1)" onblur="login_blur(1)">
                     </div>
                     <button type="submit">Sign in</button>
                 </form>
             </div>
         </div>
     </main>
-    <script src="../js/script.js"></script>
-</body>
+  </body>
+</html>
