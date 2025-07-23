@@ -80,7 +80,7 @@ nav{
     margin: auto 20px auto 20px;
 }
 .nav-list .h-link{
-    border-left: 0px;
+    border-left: 3px solid transparent;
     color: white;
     padding: 1.6em 1em 1.6em;
     text-decoration: none;
@@ -177,12 +177,40 @@ nav{
     color: #1E1E1E;
     margin: 9em 0;
 }
-.about-section > .about-content{
+.photo{
+    margin: 5em;
+}
+.photo > img{
+    object-fit: contain;
+    width: 100%;
+    border-radius: 3em;
+}
+.mission > .mission-div{
     display: flex;
     width: 70vw;
-    margin: 2em auto;
+    margin: 5em auto;
     flex-direction: row;
-    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
+.mission > .mission-div > p:nth-child(odd){
+    text-align: left;
+}
+.mission > .mission-div > p:nth-child(even){
+    text-align: right;
+}
+.mission > .mission-div > img{
+    border: .3em solid #48ba92;
+}
+.mission > .mission-div > img:nth-child(odd){
+    border-bottom-left-radius: 100%;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+}
+.mission > .mission-div > img:nth-child(even){
+    border-bottom-right-radius: 100%;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
 }
 .authors-presentation{
     display: flex;
