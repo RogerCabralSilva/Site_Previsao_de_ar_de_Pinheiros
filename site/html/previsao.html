@@ -5,138 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Previsão da Qualidade do Ar - Pinheiros</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style src="../css/style.css"></style>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Quicksand", sans-serif;
-        background: linear-gradient(135deg, #d9f0ff, #a1d6ff);
-        margin: 0;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #222;
-        min-height: 100vh;
-      }
-      h1 {
-        color: #0b3c5d;
-        margin-bottom: 1.5rem;
-        text-align: center;
-        font-size: 2.4rem;
-      }
-      .container {
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-        padding: 2rem 3rem;
-        max-width: 900px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-      .controls {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-        align-items: center;
-      }
-      label {
-        font-weight: 600;
-        color: #0b3c5d;
-      }
-      input[type="number"],
-      select {
-        padding: 0.6rem 1rem;
-        font-size: 1rem;
-        border: 2px solid #0b3c5d;
-        border-radius: 10px;
-        transition: 0.3s ease;
-      }
-      input:focus,
-      select:focus {
-        border-color: #1fff7c;
-        outline: none;
-        box-shadow: 0 0 8px #1fff7c88;
-      }
-      button {
-        background-color: #1fff7c;
-        color: #0b3c5d;
-        font-weight: 700;
-        font-size: 1.1rem;
-        border: none;
-        padding: 0.6rem 2rem;
-        border-radius: 16px;
-        cursor: pointer;
-        box-shadow: 0 6px 15px rgba(31, 255, 124, 0.4);
-        transition: 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      button:hover {
-        background-color: #16c967;
-        color: white;
-      }
-      button:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-      }
-      .spinner {
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(0, 0, 0, 0.2);
-        border-top: 3px solid #0b3c5d;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        display: none;
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      canvas {
-        background: #f9faff;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
-      }
-      @media (max-width: 600px) {
-        .controls {
-          flex-direction: column;
-        }
-        input,
-        select,
-        button {
-          width: 100%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="../css/style.css">
   </head>
-  <body>
-    <h1>Previsão da Qualidade do Ar - PM2.5</h1>
-
-    <div class="container">
-      <div class="controls">
-        <label for="period">Período:</label>
-        <input type="number" id="period" value="7" min="1" max="30" />
-        <select id="unit">
-          <option value="days">Dias</option>
-          <option value="months">Meses</option>
-        </select>
-        <button id="load-btn" onclick="fetchForecast()">
-          <span>Gerar Previsão</span>
-          <div class="spinner" id="spinner"></div>
-        </button>
+  <body style="background: linear-gradient(135deg, #d9f0ff, #a1d6ff);">
+    <nav role="navigation" aria-label="Main navigation">
+      <div class="nav-content">
+          <div id="page-title">
+              <img src="../images/logo.png" alt="logo image" style="margin-right: 1em; width: 3em;">
+              <a id="logo" href="#">A<span class="i-wrapper">i</span>r<span style="color:hsl(145, 100%, 56%);">Cast</span></a>
+          </div>
+          <div class="nav-anchors">
+              <ul class="nav-list">
+                  <li><a href="../index.html" id="home" class="h-link">Home</a></li>
+                  <li><a href="#" id="forecast" class="h-link">Previsão</a></li>
+                  <li><a href="login.html" id="login" class="h-link">Login</a></li>
+                  <li><a href="cadastro.html" id="signup">Cadastre-se</a></li>
+              </ul>
+          </div>
       </div>
+    </nav>
 
-      <canvas id="chart" width="900" height="400"></canvas>
+    <div class="forecast-body">
+      <h1>Previsão da Qualidade do Ar - PM2.5</h1>
+      <div class="container">
+        <div class="controls">
+          <label for="period">Período:</label>
+          <input type="number" id="period" value="7" min="1" max="30" />
+          <select id="unit">
+            <option value="days">Dias</option>
+            <option value="months">Meses</option>
+          </select>
+          <button id="load-btn" onclick="fetchForecast()">
+            <span>Gerar Previsão</span>
+            <div class="spinner" id="spinner"></div>
+          </button>
+        </div>
+        <canvas id="chart" width="900" height="400"></canvas>
+      </div>
     </div>
+
+    <footer style="border-top-right-radius: 50px 50px; border-top-left-radius: 50px 50px;">
+      <h1><em>Fale Conosco</em></h1>
+      <hr>
+      <address>
+          <ul>
+              <li>hgfariasfiore@gmail.com</li>
+              <li>Github</li>
+              <li>Linkedin</li>
+          </ul>
+          <ul>
+              <li>hgfariasfiore@gmail.com</li>
+              <li>Github</li>
+              <li>Linkedin</li>
+          </ul>
+      </address>
+  </footer>
 
     <script>
       const oldData = [
