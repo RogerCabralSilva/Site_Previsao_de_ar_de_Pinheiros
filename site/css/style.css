@@ -167,6 +167,39 @@ nav{
         transform: translate(107px,0);
     }
 }
+@media(max-width:1000px){
+    #wave-effect{
+        height: 150px;
+    }
+    #banner{
+        background: linear-gradient(110deg, hsl(209, 66%, 32%) 10%, 30%, hsl(200, 29%, 24%) 60%);
+        width: 100vw;
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    #banner-content{
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+    #banner-img{
+        width: 60%;
+        object-fit: scale-down;
+    }
+    #banner #slogan{
+        font-size: 2.3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+    }
+    #banner #slogan p{
+        margin: 0.5em;
+    }
+}
 
 /*********************LANDING PAGE - Main content style*********************/
 .landing-header h1{
@@ -225,7 +258,12 @@ nav{
     border-top-left-radius: 5em;
     border-bottom-right-radius: 5em;
     flex: 1;
-    box-shadow: 0 0 #b4b4b4;
+    bottom: 0;
+    transition: 0.5s
+}
+.authors-presentation div:hover{
+    bottom: 1em;
+    transition: 0.5s;
 }
 .authors-presentation div img{
     border: 5px solid #b4b4b4;
