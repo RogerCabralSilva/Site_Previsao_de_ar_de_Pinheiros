@@ -103,7 +103,84 @@ nav{
     border-radius: 10px;
     text-decoration: underline;
 }
+.hamburguer{
+    display: none;
+}
 
+@media(max-width: 1000px){
+    #logo{
+        color: #ffffff; 
+        font-size: 1.5rem;
+    }
+    #logo .i-wrapper::after{
+        content: "";
+        width: 0.2em;
+        height: 0.2em;
+        position: absolute;
+        left: 4.2em;
+        top: 1.35em;
+        border-radius: 50%;
+        background-color: #1fff7c;
+    }
+    .nav-content{
+        margin: 0 3px 0 3px;
+        padding: 18px;
+        font-weight: bold;
+        display: flex;
+    }
+    .nav-anchors{
+        position: absolute;
+        background: linear-gradient(to right, hsl(209, 66%, 32%) 10%, 30%, hsl(200, 29%, 24%) 60%);
+        top: 5em;
+        left: 0;
+        width: 100vw;
+        display: none;
+        flex-direction: row;
+        align-items: start;
+    }
+    .nav-anchors>ul{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-anchors>ul>li{
+        margin: 0;
+    }
+    .nav-anchors>ul>li>a{
+        display: block;
+        width: 100%;
+        background-color: #1fff7c;
+    }
+    .nav-list .h-link, .nav-list #signup{
+        border-left: 3px solid transparent;
+        color: white;
+        padding: 1.6em 1em 1.6em;
+        text-decoration: none;
+        background-color: #ffffff00;
+    }
+    .nav-list .h-link:active, .nav-list #signup:active{
+        border-left: 3px solid #1fff7c;
+        color: hsl(145, 100%, 56%);
+        background-color: hsl(210, 29%, 10%);
+        text-decoration: underline;
+    }
+    .hamburguer{
+        display: flex;
+    }
+    .hamburguer button{
+        background-color: #ffffff00;
+        border-radius: 5px;
+        border: transparent;
+        padding: 0.5em;
+    }
+    .hamburguer button:active{
+        background-color: #ffffff5b;
+    }
+    .hamburguer button img{
+        width: 40px;
+        height: 30px;
+    }
+}
 /*********************LANDING PAGE - Landing banner style*********************/
 #banner{
     background: linear-gradient(110deg, hsl(209, 66%, 32%) 10%, 30%, hsl(200, 29%, 24%) 60%);
@@ -183,10 +260,9 @@ nav{
         margin-top: 2rem;
         display: flex;
         flex-direction: column;
-        justify-content: start;
     }
     #banner-img{
-        width: 60%;
+        width: 40%;
         object-fit: scale-down;
     }
     #banner #slogan{
