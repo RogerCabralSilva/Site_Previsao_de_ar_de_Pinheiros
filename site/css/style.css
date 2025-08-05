@@ -157,12 +157,14 @@ nav{
         padding: 1.6em 1em 1.6em;
         text-decoration: none;
         background-color: #ffffff00;
+        border-radius: 0;
     }
     .nav-list .h-link:active, .nav-list #signup:active{
         border-left: 3px solid #1fff7c;
         color: hsl(145, 100%, 56%);
         background-color: hsl(210, 29%, 10%);
         text-decoration: underline;
+        border-radius: 0;
     }
     .hamburguer{
         display: flex;
@@ -249,6 +251,7 @@ nav{
         height: 150px;
     }
     #banner{
+        position: relative;
         background: linear-gradient(110deg, hsl(209, 66%, 32%) 10%, 30%, hsl(200, 29%, 24%) 60%);
         width: 100vw;
         height: 90vh;
@@ -261,9 +264,13 @@ nav{
         display: flex;
         flex-direction: column;
     }
+    #img-container{
+        position: absolute;
+        top: 10%;
+        left: -80px;
+    }
     #banner-img{
-        width: 40%;
-        object-fit: scale-down;
+        width: 120%;
     }
     #banner #slogan{
         font-size: 2.3rem;
